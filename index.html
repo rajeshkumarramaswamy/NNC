@@ -1,27 +1,44 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>Dashboard - NNC</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/css/index.css" rel="stylesheet">
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/custom.css" rel="stylesheet">
+  <link href="/static/css/navbar-fixed-top.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  <script>
+      $( function() {
+        $( "#datepicker" ).datepicker();
+      } );
+    </script>  <style>
+        div#select1{
+            float: left;
+            padding-top: 20px;
+            margin-left: 30px;
 
+        }
+        div#select2{
+            float: left;
+            padding-left: 20px;
+        }
+        p#datepicker{
+            float: right;
+            padding-left: 10px;
 
-    <!-- Custom styles for this template -->
-    <link href="navbar-fixed-top.css" rel="stylesheet">
-
-    <link href="/static/css/navbar-fixed-top.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+        }
+  </style>
   </head>
 
   <body>
@@ -36,7 +53,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><strong>Netenrich Nerve Center</strong></a>
+          <a class="navbar-brand" href="index.html"><strong>Netenrich Nerve Center</strong></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -47,59 +64,55 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
+            <li><a href="#">Dashboard</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
-	<div><select id="json-one">
+    <div id="select1">
+    <p><strong>Select NOC</strong></p>
+        <select id="json-one">
 		<option selected value="base">Please Select</option>
 			{% for key in data %}
 			<option value="{{key}}">{{key}}</option>
 			{% endfor %}
-			</select>
-	
+        </select>
+    </div>
 		<br />
-		
-		<select id="json-two">
+	<div id="select2">
+        <p><strong>Select Partner</strong></p>
+        <select id="json-two">
 			<option>Please choose from above</option>
-		</select></div>
-	
-	</div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
- 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-
+		</select>
+        <p id="datepicker"> Date: <input type="text" data-role="date"></p>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script type="text/javascript">
-
 		window.File = window.File || {};
 		window.File.data = {{ data|safe }};
-
 		$(function() {
-		
+
 			$("#json-one").change(function() {
-			
+
 				var Odata = window.File.data;
 				var $dropdown = $(this);
 				var i = $('#json-one').val();
 					var vals = [];
-  
-					vals = Odata[i];/*Odata.i.split(',')	*/				
-					
-					
+
+					vals = Odata[i];
+
+
 					var $jsontwo = $("#json-two");
 					$jsontwo.empty();
-					$.each(vals, function(index, value) {
-						$jsontwo.append("<option>" + value + "</option>");
+					$.each(vals, function(index, valu("<option>" + value) {
+						$jsontwo.appende + "</option>");
 					});
-			
-			});
 
+			});
 		});
 	</script>
-
+    {% block content %} {% endblock %}
+    {% block footer %}{% endblock %}
   </body>
 </html>
