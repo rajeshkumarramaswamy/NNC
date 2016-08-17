@@ -11,3 +11,10 @@ def index(request):
         " CBU Manage1": ["All Information Services", "ATech Support"],
     }
     return render(request, 'index.html', {'data': data})
+    
+def filters(request):
+    return render(request, 'filters.html')
+
+def getData():
+    nocData = Noc.objects.all()
+    return render_to_response("filters.html", { 'nocData' : nocData})
